@@ -58,8 +58,8 @@ const Experience = () => {
             >
               <Box sx={{ 
                 position: 'relative', 
-                pl: { xs: 4, sm: 6 }, 
-                mb: 8 
+                pl: { xs: 3, sm: 6 }, 
+                mb: { xs: 6, md: 8 }
               }}>
                 
                 {/* Glowing Node Dot */}
@@ -77,14 +77,14 @@ const Experience = () => {
                 }} />
 
                 <Paper className="glass-panel" elevation={0} sx={{ p: { xs: 3, sm: 5 }, borderRadius: 4, position: 'relative' }}>
-                  <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>{exp.company}</Typography>
-                  <Typography variant="subtitle1" sx={{ color: 'primary.main', mb: 3, fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: { xs: '0.85rem', sm: '1rem' } }}>
+                  <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, fontSize: { xs: '1.4rem', md: '2.125rem' } }}>{exp.company}</Typography>
+                  <Typography variant="subtitle1" sx={{ color: 'primary.main', mb: 3, fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
                     {exp.role} • {exp.duration}
                   </Typography>
                   
                   <Box component="ul" sx={{ pl: 2, mb: 4 }}>
                     {exp.highlights.map((item, i) => (
-                      <Typography component="li" variant="body1" key={i} sx={{ mb: 1.5, color: 'text.secondary', lineHeight: 1.6, fontSize: { xs: '0.95rem', sm: '1.05rem' } }}>
+                      <Typography component="li" variant="body1" key={i} sx={{ mb: 1.5, color: 'text.secondary', lineHeight: 1.6, fontSize: { xs: '0.9rem', sm: '1.05rem' } }}>
                         {item}
                       </Typography>
                     ))}

@@ -43,7 +43,7 @@ const Skills = () => {
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Paper className="glass-panel" elevation={0} sx={{ p: 5, height: '100%', borderRadius: 4, position: 'relative', overflow: 'hidden' }}>
+              <Paper className="glass-panel" elevation={0} sx={{ p: { xs: 3, md: 5 }, height: '100%', borderRadius: 4, position: 'relative', overflow: 'hidden' }}>
                 <Box sx={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', bgcolor: skillGroup.color }} />
 
                 <Typography variant="h4" sx={{ mb: 4 }}>
@@ -53,11 +53,13 @@ const Skills = () => {
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5 }}>
                   {skillGroup.items.map((item, i) => (
                     <motion.div key={i} whileHover={{ scale: 1.05, y: -2 }}>
-                      <Chip
-                        label={item}
-                        sx={{
-                          borderRadius: '8px',
-                          fontWeight: 500,
+                      <Chip 
+                        label={item} 
+                        sx={{ 
+                          borderRadius: '8px', 
+                          fontWeight: 500, 
+                          fontSize: { xs: '0.75rem', sm: '0.85rem' },
+                          height: { xs: 28, sm: 32 },
                           bgcolor: 'rgba(255, 255, 255, 0.05)',
                           border: '1px solid rgba(255, 255, 255, 0.1)',
                           color: 'text.primary',

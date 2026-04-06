@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Box, Container, useTheme } from '@mui/material';
-import { Brightness4, Brightness7, Menu as MenuIcon, Code } from '@mui/icons-material';
+import { AppBar, Toolbar, Typography, Button, IconButton, Box, Container, useTheme, Drawer, List, ListItem, ListItemButton, ListItemText, Divider } from '@mui/material';
+import { Brightness4, Brightness7, Menu as MenuIcon, Code, Close as CloseIcon } from '@mui/icons-material';
 
 const Navbar = ({ mode, toggleTheme }) => {
   const theme = useTheme();
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen((prevState) => !prevState);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +27,8 @@ const Navbar = ({ mode, toggleTheme }) => {
   };
 
   return (
-    <AppBar 
+    <>
+      <AppBar 
       position="fixed" 
       elevation={scrolled ? 4 : 0} 
       sx={{ 
@@ -69,13 +75,41 @@ const Navbar = ({ mode, toggleTheme }) => {
             <IconButton onClick={toggleTheme} sx={{ mr: 1, color: 'text.primary' }}>
               {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
             </IconButton>
-            <IconButton sx={{ color: 'text.primary' }} edge="end">
+            <IconButton onClick={handleDrawerToggle} sx={{ color: 'text.primary' }} edge="end">
               <MenuIcon />
             </IconButton>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
+      <Drawer
+        anchor="right"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{ keepMounted: true }} // Better open performance on mobile.
+        sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250, background: mode === 'dark' ? '#07090f' : '#f8f9fa' },
+        }}
+      >
+        <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end' }}>
+          <IconButton onClick={handleDrawerToggle}><CloseIcon /></IconButton>
+        </Box>
+        <Divider />
+        <List>
+          {['About', 'Skills', 'Experience', 'Projects', 'Contact'].map((item) => (
+            <ListItem key={item} disablePadding>
+              <ListItemButton 
+                onClick={() => { handleDrawerToggle(); scrollToSection(item.toLowerCase()); }} 
+                sx={{ textAlign: 'center', py: 2 }} // Increased touch target height
+              >
+                <ListItemText primary={item} primaryTypographyProps={{ fontWeight: 600 }} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </>
   );
 };
 

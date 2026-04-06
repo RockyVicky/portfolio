@@ -28,14 +28,14 @@ const Hero = () => {
         }}
       />
 
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, pt: 10 }}>
-        <Stack spacing={4} sx={{ maxWidth: '850px' }}>
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, pt: { xs: 15, md: 10 } }}>
+        <Stack spacing={4} sx={{ maxWidth: '850px', alignItems: { xs: 'center', md: 'flex-start' }, textAlign: { xs: 'center', md: 'left' } }}>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}>
-            <Typography variant="h6" color="secondary.main" sx={{ mb: 1, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <Typography variant="h6" color="secondary.main" sx={{ mb: 1, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: { xs: '0.9rem', md: '1.25rem' } }}>
               Welcome to my universe
             </Typography>
             
-            <Typography variant="h1" sx={{ fontSize: { xs: '3.5rem', sm: '5rem', md: '6.5rem' }, lineHeight: 1.1, mb: 2 }}>
+            <Typography variant="h1" sx={{ fontSize: { xs: '3rem', sm: '5rem', md: '6.5rem' }, lineHeight: 1.1, mb: 2 }}>
               Hi, I'm <br />
               <Box component="span" sx={{ position: 'relative', display: 'inline-block' }}>
                 <span className="gradient-text" style={{ background: 'linear-gradient(45deg, #00f0ff, #7000ff)', WebkitBackgroundClip: 'text' }}>Raakesh</span>
@@ -43,30 +43,30 @@ const Hero = () => {
               </Box>
             </Typography>
             
-            <Typography variant="h4" color="text.primary" sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 1, mb: 3 }}>
-              Full-Stack Engineer <Box component="span" sx={{ color: 'divider' }}>|</Box> <span style={{ color: theme.palette.primary.main }}>React.js</span> <Box component="span" sx={{ color: 'divider' }}>|</Box> <span style={{ color: theme.palette.secondary.main }}>React Native</span> <Box component="span" sx={{ color: 'divider' }}>|</Box> <span style={{ color: '#00cc66' }}>Node.js</span>
+            <Typography variant="h4" color="text.primary" sx={{ display: 'flex', alignItems: 'center', justifyContent: { xs: 'center', md: 'flex-start' }, flexWrap: 'wrap', gap: 1, mb: 3, fontSize: { xs: '1.5rem', md: '2.125rem' } }}>
+              Full-Stack Engineer <Box component="span" sx={{ color: 'divider', display: { xs: 'none', md: 'inline' } }}>|</Box> <span style={{ color: theme.palette.primary.main }}>React.js</span> <Box component="span" sx={{ color: 'divider', display: { xs: 'none', md: 'inline' } }}>|</Box> <span style={{ color: theme.palette.secondary.main }}>React Native</span> <Box component="span" sx={{ color: 'divider', display: { xs: 'none', md: 'inline' } }}>|</Box> <span style={{ color: '#00cc66' }}>Node.js</span>
             </Typography>
             
-            <Typography variant="h6" color="text.secondary" sx={{ mb: 5, fontWeight: 400, maxWidth: '650px', lineHeight: 1.6 }}>
+            <Typography variant="h6" color="text.secondary" sx={{ mb: 5, fontWeight: 400, maxWidth: '650px', lineHeight: 1.6, mx: { xs: 'auto', md: 0 }, fontSize: { xs: '1rem', md: '1.25rem' } }}>
               I engineer robust, scalable applications that sit at the intersection of beautiful UX and bleeding-edge performance.
             </Typography>
 
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ mb: 5 }}>
-              <Button variant="contained" size="large" endIcon={<ArrowForward />} onClick={() => document.getElementById('projects').scrollIntoView()} sx={{ px: 4, py: 1.5, fontSize: '1.1rem' }}>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ mb: 5, width: { xs: '100%', sm: 'auto' } }}>
+              <Button variant="contained" size="large" fullWidth endIcon={<ArrowForward />} onClick={() => document.getElementById('projects').scrollIntoView()} sx={{ px: 4, py: 1.5, fontSize: '1.1rem', minHeight: 48 }}>
                 Explore My Work
               </Button>
-              <Button variant="outlined" size="large" onClick={() => document.getElementById('contact').scrollIntoView()} sx={{ px: 4, py: 1.5, fontSize: '1.1rem' }}>
+              <Button variant="outlined" size="large" fullWidth onClick={() => document.getElementById('contact').scrollIntoView()} sx={{ px: 4, py: 1.5, fontSize: '1.1rem', minHeight: 48 }}>
                 Let's Talk
               </Button>
             </Stack>
 
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 1 }}>
-              <Stack direction="row" spacing={3} alignItems="center">
-                <Typography variant="body2" color="text.secondary" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em' }}>Connect :</Typography>
+              <Stack direction="row" spacing={2} alignItems="center" justifyContent={{ xs: 'center', md: 'flex-start' }} flexWrap="wrap" useFlexGap sx={{ gap: 2 }}>
+                <Typography variant="body2" color="text.secondary" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', width: { xs: '100%', md: 'auto' }, textAlign: { xs: 'center', md: 'left' } }}>Connect :</Typography>
                 <IconButtonComponent icon={<LinkedIn />} link="https://linkedin.com" />
                 <IconButtonComponent icon={<GitHub />} link="https://github.com/raakeshofficial" />
                 <IconButtonComponent icon={<Email />} link="mailto:raakeshofficial777@gmail.com" />
-                <Button variant="text" size="small" startIcon={<CloudDownload />} color="secondary" sx={{ ml: 'auto' }}>
+                <Button variant="text" size="small" startIcon={<CloudDownload />} color="secondary" sx={{ ml: { xs: 0, md: 'auto' }, width: { xs: '100%', md: 'auto' }, minHeight: 48 }}>
                   Download CV
                 </Button>
               </Stack>

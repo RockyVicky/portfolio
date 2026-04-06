@@ -107,7 +107,7 @@ const Projects = () => {
                       FEATURED
                     </Box>
                   )}
-                  <CardContent sx={{ flexGrow: 1, p: 5 }}>
+                  <CardContent sx={{ flexGrow: 1, p: { xs: 3, md: 5 } }}>
                     <Typography variant="h4" sx={{ mb: 2 }}>{project.title}</Typography>
                     <Typography variant="body1" sx={{ color: 'text.secondary', mb: 4, lineHeight: 1.7 }}>
                       {project.description}
@@ -119,8 +119,8 @@ const Projects = () => {
                       ))}
                     </Box>
                   </CardContent>
-                  <CardActions sx={{ px: 5, pb: 4, pt: 0 }}>
-                    <Button fullWidth size="large" variant="contained" color="secondary" onClick={() => handleOpen(project)} endIcon={<Dashboard />} sx={{ justifyContent: 'center', py: 1.5, background: 'linear-gradient(45deg, #161b2c 30%, #202b4d 90%)' }}>
+                  <CardActions sx={{ px: { xs: 3, md: 5 }, pb: { xs: 3, md: 4 }, pt: 0 }}>
+                    <Button fullWidth size="large" variant="contained" color="secondary" onClick={() => handleOpen(project)} endIcon={<Dashboard />} sx={{ justifyContent: 'center', minHeight: 48, py: 1.5, background: 'linear-gradient(45deg, #161b2c 30%, #202b4d 90%)' }}>
                       View Details
                     </Button>
                   </CardActions>
@@ -178,6 +178,8 @@ const Projects = () => {
                         sx={{ 
                           width: '100%', 
                           height: 'auto', 
+                          maxHeight: '60vh',
+                          objectFit: 'contain',
                           borderRadius: 3, 
                           border: '1px solid', 
                           borderColor: 'divider',

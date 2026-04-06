@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -88,13 +89,15 @@ function App() {
       }),
     [mode]
   );
+  
+  const finalTheme = useMemo(() => responsiveFontSizes(theme), [theme]);
 
   const toggleTheme = () => {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={finalTheme}>
       <CssBaseline />
       <Navbar mode={mode} toggleTheme={toggleTheme} />
       <Hero />

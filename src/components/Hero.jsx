@@ -35,16 +35,16 @@ const Hero = () => {
               Welcome to my universe
             </Typography>
             
-            <Typography variant="h1" sx={{ fontSize: { xs: '3rem', sm: '5rem', md: '6.5rem' }, lineHeight: 1.1, mb: 2 }}>
+            <Typography variant="h1" sx={{ fontSize: { xs: '2.8rem', sm: '5rem', md: '6.5rem' }, lineHeight: { xs: 1.2, sm: 1.1 }, mb: 2 }}>
               Hi, I'm <br />
-              <Box component="span" sx={{ position: 'relative', display: 'inline-block' }}>
-                <span className="gradient-text" style={{ background: 'linear-gradient(45deg, #00f0ff, #7000ff)', WebkitBackgroundClip: 'text' }}>Raakesh</span>
-                <span className="gradient-text" style={{ background: 'linear-gradient(45deg, #7000ff, #ff0070)', WebkitBackgroundClip: 'text', marginLeft: '12px' }}>Ramakrishnan</span>
+              <Box component="span" sx={{ position: 'relative', display: { xs: 'flex', sm: 'inline-block' }, flexDirection: 'column', alignItems: { xs: 'center', md: 'flex-start' } }}>
+                <Box component="span" className="gradient-text" sx={{ background: 'linear-gradient(45deg, #00f0ff, #7000ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Raakesh</Box>
+                <Box component="span" className="gradient-text" sx={{ background: 'linear-gradient(45deg, #7000ff, #ff0070)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', ml: { xs: 0, sm: 2 } }}>Ramakrishnan</Box>
               </Box>
             </Typography>
             
-            <Typography variant="h4" color="text.primary" sx={{ display: 'flex', alignItems: 'center', justifyContent: { xs: 'center', md: 'flex-start' }, flexWrap: 'wrap', gap: 1, mb: 3, fontSize: { xs: '1.5rem', md: '2.125rem' } }}>
-              Full-Stack Engineer <Box component="span" sx={{ color: 'divider', display: { xs: 'none', md: 'inline' } }}>|</Box> <span style={{ color: theme.palette.primary.main }}>React.js</span> <Box component="span" sx={{ color: 'divider', display: { xs: 'none', md: 'inline' } }}>|</Box> <span style={{ color: theme.palette.secondary.main }}>React Native</span> <Box component="span" sx={{ color: 'divider', display: { xs: 'none', md: 'inline' } }}>|</Box> <span style={{ color: '#00cc66' }}>Node.js</span>
+            <Typography variant="h4" color="text.primary" sx={{ display: 'flex', alignItems: 'center', justifyContent: { xs: 'center', md: 'flex-start' }, flexWrap: 'wrap', gap: 1, mb: 3, fontSize: { xs: '1.25rem', md: '2.125rem' } }}>
+              Full-Stack Engineer <Box component="span" sx={{ color: 'divider', display: { xs: 'none', sm: 'inline' } }}>|</Box> <span style={{ color: theme.palette.primary.main }}>React.js</span> <Box component="span" sx={{ color: 'divider', display: { xs: 'none', sm: 'inline' } }}>|</Box> <span style={{ color: theme.palette.secondary.main }}>React Native</span> <Box component="span" sx={{ color: 'divider', display: { xs: 'none', sm: 'inline' } }}>|</Box> <span style={{ color: '#00cc66' }}>Node.js</span>
             </Typography>
             
             <Typography variant="h6" color="text.secondary" sx={{ mb: 5, fontWeight: 400, maxWidth: '650px', lineHeight: 1.6, mx: { xs: 'auto', md: 0 }, fontSize: { xs: '1rem', md: '1.25rem' } }}>

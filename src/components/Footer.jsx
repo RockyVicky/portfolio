@@ -18,7 +18,7 @@ const Footer = () => {
                 <Code sx={{ fontSize: 22, color: '#fff' }} />
               </Box>
               <Typography variant="h4" sx={{ fontWeight: 800, letterSpacing: 1 }}>
-                Dev<span className="gradient-text">Raakesh</span>
+                R<span className="gradient-text">aakesh</span>
               </Typography>
             </Box>
             <Typography variant="body2" color="text.secondary">

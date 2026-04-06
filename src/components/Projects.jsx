@@ -138,7 +138,7 @@ const Projects = () => {
           fullWidth
           PaperProps={{
             sx: {
-              bgcolor: 'background.paper',
+              bgcolor: 'background.default',
               backgroundImage: 'none',
               borderRadius: 4,
               border: '1px solid',

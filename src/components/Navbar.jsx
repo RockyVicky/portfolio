@@ -46,7 +46,7 @@ const Navbar = ({ mode, toggleTheme }) => {
               <Code sx={{ fontSize: 24, color: '#fff' }} />
             </Box>
             <Typography variant="h4" sx={{ fontWeight: 800, letterSpacing: 1 }}>
-              Dev<span className="gradient-text">Raakesh</span>
+              R<span className="gradient-text">aakesh</span>
             </Typography>
           </Box>
           

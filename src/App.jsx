@@ -1,22 +1,64 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, lazy, Suspense } from 'react';
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, Box, CircularProgress } from '@mui/material';
+
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+
+// Lazy load secondary sections for optimal bundle size and Lighthouse scores
+const Stats = lazy(() => import('./components/Stats'));
+const About = lazy(() => import('./components/About'));
+const WhyHireMe = lazy(() => import('./components/WhyHireMe'));
+const Skills = lazy(() => import('./components/Skills'));
+const Projects = lazy(() => import('./components/Projects'));
+const Timeline = lazy(() => import('./components/Timeline'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
+
+const LoadingFallback = () => (
+  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '30vh', py: 5 }}>
+    <CircularProgress size={30} sx={{ color: '#00f0ff' }} />
+  </Box>
+);
 
 function App() {
   const [mode, setMode] = useState('dark');
+  const [activeSection, setActiveSection] = useState('home');
 
-  // Trigger CSS class for targetable globals
+  // Trigger CSS class for targeting global mode settings
   useEffect(() => {
     document.body.className = mode === 'light' ? 'light-mode' : 'dark-mode';
+    document.body.style.backgroundColor = mode === 'dark' ? '#030014' : '#f8f9fa';
   }, [mode]);
+
+  // Scroll Spy to track active section
+  useEffect(() => {
+    const sections = ['home', 'about', 'why-hire-me', 'skills', 'projects', 'timeline', 'contact'];
+    
+    const observers = sections.map(id => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          setActiveSection(id);
+        }
+      }, { 
+        threshold: 0.15, // 15% in view triggers state
+        rootMargin: '-80px 0px -20% 0px' // adjust for headers and viewport offsets
+      });
+      
+      observer.observe(el);
+      return { observer, el };
+    }).filter(Boolean);
+
+    return () => {
+      observers.forEach(obs => {
+        obs.observer.unobserve(obs.el);
+      });
+    };
+  }, []);
 
   const theme = useMemo(
     () =>
@@ -24,28 +66,32 @@ function App() {
         palette: {
           mode,
           primary: {
-            main: '#00f0ff',
-            light: '#5cffff',
-            dark: '#00b8cc',
+            main: mode === 'dark' ? '#00f0ff' : '#007a87',
+            light: mode === 'dark' ? '#5cffff' : '#33cbd9',
+            dark: mode === 'dark' ? '#00b8cc' : '#005963',
           },
           secondary: {
-            main: '#7000ff',
-            light: '#a64dff',
-            dark: '#4c00b3',
+            main: mode === 'dark' ? '#7000ff' : '#5200cc',
+            light: mode === 'dark' ? '#a64dff' : '#7a1aff',
+            dark: mode === 'dark' ? '#4c00b3' : '#3d008f',
           },
           background: {
-            default: mode === 'dark' ? '#07090f' : '#f8f9fa',
-            paper: mode === 'dark' ? 'rgba(22, 27, 44, 0.4)' : 'rgba(255, 255, 255, 0.7)',
+            default: mode === 'dark' ? '#030014' : '#f8f9fa',
+            paper: mode === 'dark' ? 'rgba(10, 7, 26, 0.45)' : 'rgba(255, 255, 255, 0.75)',
+          },
+          text: {
+            primary: mode === 'dark' ? '#f3f1fe' : '#110e1f',
+            secondary: mode === 'dark' ? '#b4aecc' : '#575466',
           },
           divider: mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)',
         },
         typography: {
           fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
           h1: { fontFamily: '"Outfit", sans-serif', fontWeight: 900, letterSpacing: '-0.02em' },
-          h2: { fontFamily: '"Outfit", sans-serif', fontWeight: 800, letterSpacing: '-0.01em' },
-          h3: { fontFamily: '"Outfit", sans-serif', fontWeight: 800 },
-          h4: { fontFamily: '"Outfit", sans-serif', fontWeight: 600 },
-          h5: { fontFamily: '"Outfit", sans-serif', fontWeight: 600 },
+          h2: { fontFamily: '"Outfit", sans-serif', fontWeight: 800, letterSpacing: '-0.015em' },
+          h3: { fontFamily: '"Outfit", sans-serif', fontWeight: 800, letterSpacing: '-0.01em' },
+          h4: { fontFamily: '"Outfit", sans-serif', fontWeight: 700 },
+          h5: { fontFamily: '"Outfit", sans-serif', fontWeight: 700 },
           h6: { fontFamily: '"Outfit", sans-serif', fontWeight: 600 },
         },
         shape: {
@@ -57,31 +103,8 @@ function App() {
               root: {
                 borderRadius: 12,
                 textTransform: 'none',
-                fontWeight: 600,
+                fontWeight: 700,
                 transition: 'all 0.3s ease',
-              },
-              contained: {
-                background: 'linear-gradient(45deg, #00f0ff 30%, #7000ff 90%)',
-                color: '#fff',
-                boxShadow: '0 4px 20px rgba(112, 0, 255, 0.3)',
-                '&:hover': {
-                  boxShadow: '0 6px 25px rgba(0, 240, 255, 0.5)',
-                  transform: 'translateY(-2px)',
-                },
-              },
-              outlined: {
-                borderWidth: '2px',
-                '&:hover': {
-                  borderWidth: '2px',
-                  transform: 'translateY(-2px)',
-                },
-              },
-            },
-          },
-          MuiPaper: {
-            styleOverrides: {
-              root: {
-                backgroundImage: 'none',
               },
             },
           },
@@ -100,13 +123,18 @@ function App() {
     <ThemeProvider theme={finalTheme}>
       <CssBaseline />
       <Navbar mode={mode} toggleTheme={toggleTheme} />
-      <Hero />
-      <About />
-      <Skills />
-      <Experience />
-      <Projects />
-      <Contact />
-      <Footer />
+      <Hero activeSection={activeSection} mode={mode} />
+      <Suspense fallback={<LoadingFallback />}>
+        <Stats />
+        <About />
+        <WhyHireMe />
+        <Skills />
+        <Projects />
+        <Timeline />
+        <Testimonials />
+        <Contact />
+        <Footer />
+      </Suspense>
     </ThemeProvider>
   );
 }

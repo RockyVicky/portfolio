@@ -3,8 +3,18 @@ import { motion } from 'framer-motion';
 
 const experienceData = [
   {
+    company: 'Upskilling & Career Development',
+    duration: 'Feb 2026 – Present',
+    role: 'AI Product Engineering & R&D',
+    highlights: [
+      'Deeply researching cognitive AI agent loops, vector RAG database pipelines, and Model Context Protocol (MCP) integrations.',
+      'Upskilling on next-generation software architectures, serverless scalability, and advanced frontend animations.',
+      'Building open-source productivity bridges and custom micro-services to prep for AI-first SaaS environments.'
+    ]
+  },
+  {
     company: 'Eligarf Technologies',
-    duration: 'Feb 2025 – Present',
+    duration: 'Feb 2025 – Feb 2026',
     role: 'Full-Stack Engineer',
     highlights: [
       'Architected comprehensive community features & APIs for iMeUsWe mobile platform (Family networking & astrology).',
@@ -32,7 +42,7 @@ const Experience = () => {
     <Box id="experience" sx={{ py: { xs: 8, md: 15 }, position: 'relative' }}>
       <Container maxWidth="md">
         <Typography variant="h2" sx={{ mb: 10, textAlign: 'center' }}>
-          Professional <span className="gradient-alt-text" style={{ background: 'linear-gradient(90deg, #a18cd1, #fbc2eb)', WebkitBackgroundClip: 'text', textFillColor: 'transparent' }}>Journey</span>
+          Professional <span className="gradient-alt-text" style={{ background: 'linear-gradient(90deg, #a18cd1, #fbc2eb)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Journey</span>
         </Typography>
 
         <Box sx={{ position: 'relative', ml: { xs: 2, md: 4 } }}>
@@ -69,10 +79,10 @@ const Experience = () => {
                   top: 32, 
                   width: 19, 
                   height: 19, 
-                  bgcolor: '#07090f', 
-                  border: '3px solid #00f0ff',
+                  bgcolor: (theme) => theme.palette.mode === 'dark' ? '#07090f' : '#ffffff', 
+                  border: '3px solid var(--neon-cyan)',
                   borderRadius: '50%',
-                  boxShadow: '0 0 12px #00f0ff',
+                  boxShadow: '0 0 12px var(--neon-cyan)',
                   zIndex: 2
                 }} />
 
@@ -95,7 +105,7 @@ const Experience = () => {
                       <Typography variant="subtitle2" sx={{ fontWeight: 800, mb: 1.5, color: 'text.primary', textTransform: 'uppercase' }}>Involved Projects</Typography>
                       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                         {exp.projects.map((proj, i) => (
-                          <Box key={i} sx={{ px: 2, py: 0.8, bgcolor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 2, fontSize: '0.8rem', fontWeight: 600 }}>
+                          <Box key={i} sx={{ px: 2, py: 0.8, bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)', border: '1px solid var(--border-dark)', borderRadius: 2, fontSize: '0.8rem', fontWeight: 600 }}>
                             {proj}
                           </Box>
                         ))}

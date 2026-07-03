@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Box, Container, useTheme, Drawer, List, ListItem, ListItemButton, ListItemText, Divider } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, IconButton, Box, Container, Drawer, List, ListItem, ListItemButton, ListItemText, Divider, useTheme } from '@mui/material';
 import { Brightness4, Brightness7, Menu as MenuIcon, Code, Close as CloseIcon } from '@mui/icons-material';
 
 const Navbar = ({ mode, toggleTheme }) => {
@@ -13,7 +13,7 @@ const Navbar = ({ mode, toggleTheme }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -26,84 +26,171 @@ const Navbar = ({ mode, toggleTheme }) => {
     }
   };
 
+  const menuItems = ['About', 'Skills', 'Projects', 'Timeline', 'Contact'];
+
   return (
     <>
       <AppBar 
-      position="fixed" 
-      elevation={scrolled ? 4 : 0} 
-      sx={{ 
-        background: scrolled ? (mode === 'dark' ? 'rgba(7, 9, 15, 0.85)' : 'rgba(255, 255, 255, 0.85)') : 'transparent', 
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        transition: 'all 0.3s ease',
-        borderBottom: scrolled ? `1px solid ${theme.palette.divider}` : 'none',
-        padding: scrolled ? '0' : '10px 0'
-      }}
-    >
-      <Container maxWidth="lg">
-        <Toolbar disableGutters sx={{ height: '80px' }}>
-          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => scrollToTop()}>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: 2, background: 'linear-gradient(135deg, #00f0ff 0%, #7000ff 100%)', boxShadow: '0 4px 12px rgba(112, 0, 255, 0.4)', mr: 1.5 }}>
-              <Code sx={{ fontSize: 24, color: '#fff' }} />
-            </Box>
-            <Typography variant="h4" sx={{ fontWeight: 800, letterSpacing: 1 }}>
-              R<span className="gradient-text">aakesh</span>
-            </Typography>
-          </Box>
-          
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center' }}>
-            {['About', 'Skills', 'Experience', 'Projects', 'Contact'].map((item) => (
-              <Button 
-                key={item} 
-                onClick={() => scrollToSection(item.toLowerCase())}
+        position="fixed" 
+        elevation={0} 
+        sx={{ 
+          background: scrolled 
+            ? (mode === 'dark' ? 'rgba(3, 0, 20, 0.75)' : 'rgba(255, 255, 255, 0.85)') 
+            : 'transparent', 
+          backdropFilter: scrolled ? 'blur(16px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
+          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          borderBottom: scrolled ? '1px solid var(--border-dark)' : '1px solid transparent',
+          py: scrolled ? 1 : 2.5
+        }}
+      >
+        <Container maxWidth="lg">
+          <Toolbar disableGutters sx={{ justifyContent: 'space-between', minHeight: '64px' }}>
+            {/* Logo */}
+            <Box 
+              sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <Box sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                width: 38, 
+                height: 38, 
+                borderRadius: 2, 
+                background: 'linear-gradient(135deg, #00f0ff 0%, #7000ff 100%)', 
+                boxShadow: '0 4px 15px rgba(112, 0, 255, 0.4)', 
+                mr: 1.5 
+              }}>
+                <Code sx={{ fontSize: 22, color: '#fff' }} />
+              </Box>
+              <Typography 
+                variant="h4" 
                 sx={{ 
-                  color: 'text.primary', 
-                  fontSize: '1rem',
-                  px: 2,
-                  '&:hover': { color: 'primary.main', background: 'transparent' }
+                  fontWeight: 900, 
+                  letterSpacing: '0.05em', 
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                  color: 'var(--text-dark-primary)'
                 }}
               >
-                {item}
-              </Button>
-            ))}
-            <Box sx={{ width: '1px', height: '24px', bgcolor: 'divider', mx: 2 }} />
-            <IconButton onClick={toggleTheme} sx={{ color: 'text.primary' }}>
-              {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
-            </IconButton>
-          </Box>
-          
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton onClick={toggleTheme} sx={{ mr: 1, color: 'text.primary' }}>
-              {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
-            </IconButton>
-            <IconButton onClick={handleDrawerToggle} sx={{ color: 'text.primary' }} edge="end">
-              <MenuIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+                R<span className="gradient-text">aakesh</span>
+              </Typography>
+            </Box>
+            
+            {/* Desktop Navigation Links */}
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1.5, alignItems: 'center' }}>
+              {menuItems.map((item) => (
+                <Button 
+                  key={item} 
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className="focusable control-console-item"
+                  sx={{ 
+                    color: 'var(--text-dark-secondary)', 
+                    fontSize: '0.9rem',
+                    fontWeight: 600,
+                    px: 2,
+                    py: 1,
+                    borderRadius: 2,
+                    transition: 'all 0.3s',
+                    '&:hover': { 
+                      color: 'primary.main', 
+                      background: mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)' 
+                    }
+                  }}
+                >
+                  {item}
+                </Button>
+              ))}
+              <Box sx={{ width: '1px', height: '20px', bgcolor: 'var(--border-dark)', mx: 1.5 }} />
+              
+              {/* Theme toggle indicator */}
+              <IconButton 
+                onClick={toggleTheme} 
+                sx={{ 
+                  color: 'var(--text-dark-primary)',
+                  bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)',
+                  border: '1px solid var(--border-dark)',
+                  '&:hover': { bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)' }
+                }}
+              >
+                {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+              </IconButton>
+            </Box>
+            
+            {/* Mobile Actions */}
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', gap: 1 }}>
+              <IconButton 
+                onClick={toggleTheme} 
+                sx={{ 
+                  color: 'var(--text-dark-primary)', 
+                  bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)',
+                  border: '1px solid var(--border-dark)'
+                }}
+              >
+                {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+              </IconButton>
+              <IconButton 
+                onClick={handleDrawerToggle} 
+                sx={{ 
+                  color: 'var(--text-dark-primary)',
+                  bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)',
+                  border: '1px solid var(--border-dark)'
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      {/* Mobile Navigation Drawer */}
       <Drawer
         anchor="right"
         open={mobileOpen}
         onClose={handleDrawerToggle}
-        ModalProps={{ keepMounted: true }} // Better open performance on mobile.
+        ModalProps={{ keepMounted: true }}
         sx={{
           display: { xs: 'block', md: 'none' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250, background: mode === 'dark' ? '#07090f' : '#f8f9fa' },
+          '& .MuiDrawer-paper': { 
+            boxSizing: 'border-box', 
+            width: 280, 
+            background: mode === 'dark' ? '#0a071a' : '#ffffff',
+            borderLeft: '1px solid var(--border-dark)',
+            p: 3
+          },
         }}
       >
-        <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end' }}>
-          <IconButton onClick={handleDrawerToggle}><CloseIcon /></IconButton>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+          <Typography variant="h5" sx={{ fontWeight: 800, fontFamily: 'var(--font-heading)', color: 'var(--text-dark-primary)' }}>
+            Menu
+          </Typography>
+          <IconButton onClick={handleDrawerToggle} sx={{ color: 'var(--text-dark-primary)' }}>
+            <CloseIcon />
+          </IconButton>
         </Box>
-        <Divider />
+        <Divider sx={{ borderColor: 'var(--border-dark)', mb: 3 }} />
         <List>
-          {['About', 'Skills', 'Experience', 'Projects', 'Contact'].map((item) => (
-            <ListItem key={item} disablePadding>
+          {menuItems.map((item) => (
+            <ListItem key={item} disablePadding sx={{ mb: 1 }}>
               <ListItemButton 
                 onClick={() => { handleDrawerToggle(); scrollToSection(item.toLowerCase()); }} 
-                sx={{ textAlign: 'center', py: 2 }} // Increased touch target height
+                sx={{ 
+                  textAlign: 'left', 
+                  py: 1.5,
+                  borderRadius: 2,
+                  '&:hover': { bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)' }
+                }} 
               >
-                <ListItemText primary={item} primaryTypographyProps={{ fontWeight: 600 }} />
+                <ListItemText 
+                  primary={item} 
+                  primaryTypographyProps={{ 
+                    fontWeight: 700,
+                    color: 'var(--text-dark-primary)',
+                    fontSize: '1.1rem'
+                  }} 
+                />
               </ListItemButton>
             </ListItem>
           ))}
@@ -111,10 +198,6 @@ const Navbar = ({ mode, toggleTheme }) => {
       </Drawer>
     </>
   );
-};
-
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 export default Navbar;

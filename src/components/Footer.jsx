@@ -9,7 +9,7 @@ const Footer = () => {
   const menuItems = ['About', 'Skills', 'Projects', 'Timeline', 'Contact'];
 
   return (
-    <Box sx={{ pt: 8, pb: 4, bgcolor: 'var(--bg-dark)', position: 'relative', borderTop: '1px solid var(--border-dark)' }}>
+    <Box sx={{ pt: { xs: 6, md: 8 }, pb: 4, bgcolor: 'var(--bg-dark)', position: 'relative', borderTop: '1px solid var(--border-dark)' }}>
       <Container maxWidth="lg">
         <Box sx={{ 
           display: 'flex', 
@@ -45,7 +45,7 @@ const Footer = () => {
           {/* Quick Menu */}
           <Stack 
             direction={{ xs: 'column', sm: 'row' }} 
-            spacing={{ xs: 2.5, sm: 4 }} 
+            spacing={{ xs: 2, sm: 4 }} 
             alignItems="center"
             sx={{ mb: { xs: 4, md: 0 } }}
           >
@@ -75,11 +75,13 @@ const Footer = () => {
               bgcolor: 'rgba(0, 240, 255, 0.05)', 
               color: '#00f0ff',
               border: '1px solid rgba(0, 240, 255, 0.15)',
+              width: 44,
+              height: 44,
               '&:hover': { bgcolor: '#00f0ff', color: '#030014', transform: 'translateY(-3px)' },
               transition: 'all 0.3s'
             }}
           >
-            <ArrowUpward />
+            <ArrowUpward sx={{ fontSize: 20 }} />
           </IconButton>
         </Box>
 
@@ -91,7 +93,7 @@ const Footer = () => {
           alignItems: 'center', 
           color: 'var(--text-dark-secondary)', 
           borderTop: '1px solid var(--border-dark)', 
-          pt: 4 
+          pt: { xs: 3, sm: 4 } 
         }}>
           <Typography variant="body2" sx={{ mb: { xs: 2, sm: 0 }, fontSize: '0.8rem' }}>
             © {new Date().getFullYear()} Raakesh Ramakrishnan. All rights reserved.

@@ -73,17 +73,21 @@ const Timeline = () => {
           </Typography>
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 6 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 6, width: '100%' }}>
           <Tabs 
             value={activeTab} 
             onChange={handleTabChange} 
             textColor="primary" 
             indicatorColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
+            allowScrollButtonsMobile
             sx={{
               bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(10, 7, 26, 0.4)' : 'rgba(0, 0, 0, 0.03)',
               borderRadius: 3,
               p: 0.5,
               border: '1px solid var(--border-dark)',
+              width: '100%',
               '& .MuiTabs-indicator': {
                 height: '100%',
                 borderRadius: 2.5,
@@ -98,7 +102,7 @@ const Timeline = () => {
                 zIndex: 1,
                 textTransform: 'none',
                 transition: 'color 0.3s',
-                fontSize: { xs: '0.9rem', sm: '1rem' }
+                fontSize: { xs: '0.8rem', sm: '1rem' }
               }
             }}
           >
@@ -116,7 +120,7 @@ const Timeline = () => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
             >
-              <Box sx={{ maxWidth: '800px', mx: 'auto', position: 'relative', pl: { xs: 2, sm: 4 } }}>
+              <Box sx={{ maxWidth: '800px', mx: 'auto', position: 'relative', pl: { xs: 3, sm: 4 } }}>
                 {/* Center / Left line */}
                 <Box sx={{
                   position: 'absolute',
@@ -129,14 +133,14 @@ const Timeline = () => {
                 }} />
 
                 {careerTimeline.map((item, index) => (
-                  <Box key={index} sx={{ position: 'relative', mb: 6, pl: { xs: 3, sm: 6 } }}>
+                  <Box key={index} sx={{ position: 'relative', mb: 6, pl: { xs: 2.5, sm: 6 } }}>
                     {/* Node Icon Indicator */}
                     <Box sx={{
                       position: 'absolute',
-                      left: -20,
+                      left: { xs: -16, sm: -20 },
                       top: 4,
-                      width: 40,
-                      height: 40,
+                      width: { xs: 32, sm: 40 },
+                      height: { xs: 32, sm: 40 },
                       borderRadius: '50%',
                       background: (theme) => theme.palette.mode === 'dark' ? 'rgba(3, 0, 20, 0.95)' : '#ffffff',
                       border: `2px solid var(${index === 0 ? '--neon-cyan' : '--neon-purple'})`,
@@ -145,7 +149,10 @@ const Timeline = () => {
                       alignItems: 'center',
                       justifyContent: 'center',
                       color: `var(${index === 0 ? '--neon-cyan' : '--neon-purple'})`,
-                      zIndex: 2
+                      zIndex: 2,
+                      '& svg': {
+                        fontSize: { xs: 16, sm: 20 }
+                      }
                     }}>
                       {item.icon}
                     </Box>
@@ -153,23 +160,23 @@ const Timeline = () => {
                     <Box 
                       className="glass-card" 
                       sx={{ 
-                        p: { xs: 3, sm: 4 }, 
+                        p: { xs: 2.5, sm: 4 }, 
                         borderRadius: 3, 
                         '&:hover': {
                           borderColor: index === 0 ? 'rgba(0, 240, 255, 0.2)' : 'rgba(112, 0, 255, 0.2)'
                         }
                       }}
                     >
-                      <Typography variant="body2" sx={{ color: 'primary.main', fontWeight: 600, mb: 1 }}>
+                      <Typography variant="body2" sx={{ color: 'primary.main', fontWeight: 600, mb: 1, fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
                         {item.date}
                       </Typography>
-                      <Typography variant="h4" sx={{ fontWeight: 800, mb: 0.5, fontSize: { xs: '1.25rem', sm: '1.75rem' } }}>
+                      <Typography variant="h4" sx={{ fontWeight: 800, mb: 0.5, fontSize: { xs: '1.15rem', sm: '1.75rem' } }}>
                         {item.title}
                       </Typography>
-                      <Typography variant="subtitle1" sx={{ color: 'var(--text-dark-secondary)', fontWeight: 600, mb: 2 }}>
+                      <Typography variant="subtitle1" sx={{ color: 'var(--text-dark-secondary)', fontWeight: 600, mb: 2, fontSize: { xs: '0.9rem', sm: '1rem' } }}>
                         {item.subtitle}
                       </Typography>
-                      <Typography variant="body1" sx={{ color: 'var(--text-dark-secondary)', lineHeight: 1.6, fontSize: { xs: '0.9rem', sm: '1rem' } }}>
+                      <Typography variant="body1" sx={{ color: 'var(--text-dark-secondary)', lineHeight: 1.6, fontSize: { xs: '0.85rem', sm: '1rem' } }}>
                         {item.desc}
                       </Typography>
                     </Box>
@@ -185,7 +192,7 @@ const Timeline = () => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
             >
-              <Grid container spacing={3} justifyContent="center" sx={{ maxWidth: '900px', mx: 'auto' }}>
+              <Grid container spacing={{ xs: 2, sm: 3 }} justifyContent="center" sx={{ maxWidth: '900px', mx: 'auto' }}>
                 {aiJourney.map((step, index) => {
                   let badgeColor = '';
                   let glowColor = '';
@@ -217,7 +224,7 @@ const Timeline = () => {
                         <Box
                           className="glass-card"
                           sx={{
-                            p: 3,
+                            p: { xs: 2.5, sm: 3 },
                             height: '100%',
                             borderRadius: 3.5,
                             background: (theme) => {

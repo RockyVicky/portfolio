@@ -78,7 +78,7 @@ const Skills = () => {
           </Typography>
         </Box>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={{ xs: 2.5, md: 4 }}>
           {skillsGroups.map((group, index) => (
             <Grid item xs={12} md={6} lg={4} key={index}>
               <motion.div
@@ -92,7 +92,7 @@ const Skills = () => {
                 <Box
                   className="glass-card"
                   sx={{
-                    p: 4,
+                    p: { xs: 2.5, md: 4 },
                     height: '100%',
                     borderRadius: 4,
                     display: 'flex',
@@ -113,7 +113,7 @@ const Skills = () => {
                       }}>
                         {group.icon}
                       </Box>
-                      <Typography variant="h4" sx={{ fontWeight: 800, fontSize: '1.15rem', color: 'text.primary' }}>
+                      <Typography variant="h4" sx={{ fontWeight: 800, fontSize: { xs: '1.05rem', md: '1.15rem' }, color: 'text.primary' }}>
                         {group.category}
                       </Typography>
                     </Box>
@@ -127,10 +127,10 @@ const Skills = () => {
                     {group.items.map((skill, i) => (
                       <Box key={i}>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-                          <Typography variant="body1" sx={{ fontWeight: 700, color: 'var(--text-dark-primary)', fontSize: '0.95rem' }}>
+                          <Typography variant="body1" sx={{ fontWeight: 700, color: 'var(--text-dark-primary)', fontSize: { xs: '0.88rem', md: '0.95rem' } }}>
                             {skill.name}
                           </Typography>
-                          <Typography variant="body2" sx={{ fontWeight: 800, color: 'primary.main', fontSize: '0.85rem' }}>
+                          <Typography variant="body2" sx={{ fontWeight: 800, color: 'primary.main', fontSize: { xs: '0.8rem', md: '0.85rem' } }}>
                             {skill.confidence}%
                           </Typography>
                         </Box>
@@ -151,10 +151,10 @@ const Skills = () => {
                         />
 
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
-                          <Typography variant="body2" sx={{ color: 'var(--text-dark-secondary)', fontSize: '0.75rem' }}>
+                          <Typography variant="body2" sx={{ color: 'var(--text-dark-secondary)', fontSize: '0.72rem' }}>
                             Exp: {skill.exp}
                           </Typography>
-                          <Typography variant="body2" sx={{ color: 'var(--text-dark-secondary)', fontSize: '0.75rem', textAlign: 'right', maxWidth: '70%', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                          <Typography variant="body2" sx={{ color: 'var(--text-dark-secondary)', fontSize: '0.72rem', textAlign: 'right', maxWidth: '65%', lineHeight: 1.25 }}>
                             Used in: {skill.projects}
                           </Typography>
                         </Box>

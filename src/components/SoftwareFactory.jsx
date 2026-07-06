@@ -12,7 +12,7 @@ const CyberBox = ({ children, sx = {}, ...props }) => (
     sx={{ 
       position: 'relative', 
       borderRadius: 3.5, 
-      p: 3, 
+      p: { xs: 2, sm: 3 }, 
       overflow: 'hidden', 
       border: '1px solid',
       borderColor: 'divider',
@@ -38,8 +38,8 @@ const CircularProgressDial = ({ value, label, color = 'var(--neon-cyan)' }) => {
 
   return (
     <Stack alignItems="center" spacing={1} sx={{ flex: 1 }}>
-      <Box sx={{ position: 'relative', width: 68, height: 68 }}>
-        <svg width="68" height="68" style={{ transform: 'rotate(-90deg)' }}>
+      <Box sx={{ position: 'relative', width: { xs: 52, sm: 68 }, height: { xs: 52, sm: 68 } }}>
+        <svg viewBox="0 0 68 68" width="100%" height="100%" style={{ transform: 'rotate(-90deg)' }}>
           {/* Inner Circle Track */}
           <circle 
             cx="34" 
@@ -78,13 +78,13 @@ const CircularProgressDial = ({ value, label, color = 'var(--neon-cyan)' }) => {
           justifyContent: 'center', 
           fontFamily: 'var(--font-mono)',
           fontWeight: 800,
-          fontSize: '0.78rem',
+          fontSize: { xs: '0.65rem', sm: '0.78rem' },
           color: 'text.primary'
         }}>
           {Math.round(value)}%
         </Box>
       </Box>
-      <Typography variant="caption" sx={{ color: 'var(--text-dark-secondary)', fontWeight: 800, fontSize: '0.62rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+      <Typography variant="caption" sx={{ color: 'var(--text-dark-secondary)', fontWeight: 800, fontSize: { xs: '0.55rem', sm: '0.62rem' }, textTransform: 'uppercase', letterSpacing: '0.08em', textAlign: 'center' }}>
         {label}
       </Typography>
     </Stack>
@@ -484,7 +484,7 @@ const SoftwareFactory = ({ activeSection = 'idea', mode = 'dark' }) => {
 
     // Calculate layout parameters
     const getLayout = (w, h) => {
-      if (w < 520) {
+      if (w < 600) {
         // Mobile layout: central core, nodes in full circle orbit
         const cx = w / 2;
         const cy = h / 2 - 15;
@@ -1063,10 +1063,11 @@ const SoftwareFactory = ({ activeSection = 'idea', mode = 'dark' }) => {
           ctx.arc(22, 26, 3.5, 0, Math.PI * 2);
           ctx.fill();
 
-          ctx.fillStyle = isDark ? '#fff' : '#110e1f';
-          ctx.font = 'bold 9.5px var(--font-sans)';
-          ctx.textAlign = 'left';
-          ctx.fillText(`${activeAgentInfo.name}: ${activeAgentInfo.task.substring(0, 33)}...`, 32, 29);
+          const maxCharCount = Math.max(12, Math.floor((width - 100) / 5.5));
+          const slicedTask = activeAgentInfo.task.length > maxCharCount 
+            ? `${activeAgentInfo.task.substring(0, maxCharCount)}...` 
+            : activeAgentInfo.task;
+          ctx.fillText(`${activeAgentInfo.name}: ${slicedTask}`, 32, 29);
         }
       }
 
@@ -1086,7 +1087,7 @@ const SoftwareFactory = ({ activeSection = 'idea', mode = 'dark' }) => {
   }, []);
 
   return (
-    <Box sx={{ width: '100%', position: 'relative', zIndex: 1 }}>
+    <Box sx={{ width: '100%', minWidth: 0, overflow: 'hidden', position: 'relative', zIndex: 1 }}>
       <Stack spacing={3}>
         {/* Visual Assembly Viewport Card (Top) */}
         <CyberBox sx={{ p: 0, overflow: 'hidden' }}>
@@ -1113,7 +1114,7 @@ const SoftwareFactory = ({ activeSection = 'idea', mode = 'dark' }) => {
             borderTop: '1px solid', 
             borderTopColor: 'divider',
             bgcolor: mode === 'dark' ? 'rgba(5, 3, 15, 0.6)' : 'rgba(0, 0, 0, 0.01)', 
-            p: 2 
+            p: { xs: 1.5, sm: 2 } 
           }}>
             <Grid container spacing={1} justifyContent="space-between">
               {pipelineStages.map((stage, i) => {
@@ -1127,7 +1128,7 @@ const SoftwareFactory = ({ activeSection = 'idea', mode = 'dark' }) => {
                       }}
                       sx={{ 
                         textAlign: 'center', 
-                        p: 1, 
+                        p: { xs: 0.5, sm: 1 }, 
                         borderRadius: 2, 
                         border: '1px solid',
                         borderColor: isActive ? 'primary.main' : 'transparent',
@@ -1150,14 +1151,14 @@ const SoftwareFactory = ({ activeSection = 'idea', mode = 'dark' }) => {
                         }
                       }}
                     >
-                      <Box sx={{ color: isActive ? 'primary.main' : 'var(--text-dark-secondary)', mb: 0.5, display: 'flex', justifyContent: 'center' }}>
+                      <Box sx={{ color: isActive ? 'primary.main' : 'var(--text-dark-secondary)', mb: { xs: 0.25, sm: 0.5 }, display: 'flex', justifyContent: 'center', '& .MuiSvgIcon-root': { fontSize: { xs: 16, sm: 20 } } }}>
                         {stage.icon}
                       </Box>
                       <Typography 
                         variant="body2" 
                         sx={{ 
                           fontWeight: 800, 
-                          fontSize: '0.62rem',
+                          fontSize: { xs: '0.5rem', sm: '0.62rem' },
                           color: isActive ? 'text.primary' : 'var(--text-dark-secondary)',
                           textTransform: 'uppercase',
                           letterSpacing: '0.05em'
@@ -1174,88 +1175,90 @@ const SoftwareFactory = ({ activeSection = 'idea', mode = 'dark' }) => {
         </CyberBox>
 
         {/* Telemetry Control Deck (Bottom half - split horizontally) */}
-        <Grid container spacing={3}>
-          {/* Stats Deck & Dials (Left) */}
-          <Grid item xs={12} md={6}>
-            <CyberBox sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 2.5 }}>
-              <Box>
-                <Typography variant="subtitle2" sx={{ fontWeight: 800, color: 'text.primary', mb: 2, fontFamily: 'var(--font-heading)', display: 'flex', alignItems: 'center', gap: 1, letterSpacing: '0.05em' }}>
-                  <Dvr sx={{ color: 'var(--neon-cyan)', fontSize: 18 }} /> RESOURCES & DIAGNOSTICS
+        <Box sx={{ width: '100%', overflow: 'hidden' }}>
+          <Grid container spacing={{ xs: 2, md: 3 }}>
+            {/* Stats Deck & Dials (Left) */}
+            <Grid item xs={12} lg={6}>
+              <CyberBox sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: { xs: 1.5, sm: 2.5 } }}>
+                <Box>
+                  <Typography variant="subtitle2" sx={{ fontWeight: 800, color: 'text.primary', mb: 2, fontFamily: 'var(--font-heading)', display: 'flex', alignItems: 'center', gap: 1, letterSpacing: '0.05em', fontSize: { xs: '0.78rem', sm: '0.875rem' } }}>
+                    <Dvr sx={{ color: 'var(--neon-cyan)', fontSize: { xs: 16, sm: 18 } }} /> RESOURCES & DIAGNOSTICS
+                  </Typography>
+                  
+                  {/* 2x2 Numeric Stats Panel */}
+                  <Grid container spacing={{ xs: 1, sm: 1.5 }}>
+                    <Grid item xs={12} sm={6}>
+                      <Box sx={{ p: { xs: 1, sm: 1.5 }, borderRadius: 2, bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', border: '1px solid var(--border-dark)' }}>
+                        <Typography variant="caption" sx={{ color: 'var(--text-dark-secondary)', fontSize: { xs: '0.52rem', sm: '0.58rem' }, display: 'block', mb: 0.5, textTransform: 'uppercase' }}>BUILD SUCCESS</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 900, color: 'var(--neon-green)', fontFamily: 'var(--font-mono)', fontSize: { xs: '0.85rem', sm: '1rem' } }}>99.98%</Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Box sx={{ p: { xs: 1, sm: 1.5 }, borderRadius: 2, bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', border: '1px solid var(--border-dark)' }}>
+                        <Typography variant="caption" sx={{ color: 'var(--text-dark-secondary)', fontSize: { xs: '0.52rem', sm: '0.58rem' }, display: 'block', mb: 0.5, textTransform: 'uppercase' }}>DEPLOYMENTS</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 900, color: 'var(--neon-cyan)', fontFamily: 'var(--font-mono)', fontSize: { xs: '0.85rem', sm: '1rem' } }}>{stats.todayDeployments}</Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Box sx={{ p: { xs: 1, sm: 1.5 }, borderRadius: 2, bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', border: '1px solid var(--border-dark)' }}>
+                        <Typography variant="caption" sx={{ color: 'var(--text-dark-secondary)', fontSize: { xs: '0.52rem', sm: '0.58rem' }, display: 'block', mb: 0.5, textTransform: 'uppercase' }}>ACTIVE USERS</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 900, color: 'var(--neon-pink)', fontFamily: 'var(--font-mono)', fontSize: { xs: '0.85rem', sm: '1rem' } }}>{stats.onlineUsers}</Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Box sx={{ p: { xs: 1, sm: 1.5 }, borderRadius: 2, bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', border: '1px solid var(--border-dark)' }}>
+                        <Typography variant="caption" sx={{ color: 'var(--text-dark-secondary)', fontSize: { xs: '0.52rem', sm: '0.58rem' }, display: 'block', mb: 0.5, textTransform: 'uppercase' }}>LATENCY RATE</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 900, color: 'var(--neon-yellow)', fontFamily: 'var(--font-mono)', fontSize: { xs: '0.85rem', sm: '1rem' } }}>{stats.responseTime}ms</Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+
+                {/* SVG Circular Dial Meters */}
+                <Stack direction="row" spacing={{ xs: 1, sm: 2 }} sx={{ pt: 1, borderTop: '1px solid', borderTopColor: 'divider' }}>
+                  <CircularProgressDial value={stats.cpu} label="CPU Loading" color="var(--neon-cyan)" />
+                  <CircularProgressDial value={stats.memory * 2} label="Memory Load" color="var(--neon-purple)" />
+                </Stack>
+              </CyberBox>
+            </Grid>
+
+            {/* Compiler Terminal (Right) */}
+            <Grid item xs={12} lg={6}>
+              <CyberBox sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
+                <Typography variant="subtitle2" sx={{ fontWeight: 800, color: 'text.primary', mb: 2, fontFamily: 'var(--font-heading)', display: 'flex', alignItems: 'center', gap: 1, letterSpacing: '0.05em', fontSize: { xs: '0.78rem', sm: '0.875rem' } }}>
+                  <Speed sx={{ color: 'var(--neon-purple)', fontSize: { xs: 16, sm: 18 } }} /> DIAGNOSTIC FEEDSTREAM
                 </Typography>
                 
-                {/* 2x2 Numeric Stats Panel */}
-                <Grid container spacing={1.5}>
-                  <Grid item xs={6}>
-                    <Box sx={{ p: 1.5, borderRadius: 2, bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', border: '1px solid var(--border-dark)' }}>
-                      <Typography variant="caption" sx={{ color: 'var(--text-dark-secondary)', fontSize: '0.58rem', display: 'block', mb: 0.5, textTransform: 'uppercase' }}>BUILD SUCCESS</Typography>
-                      <Typography variant="body1" sx={{ fontWeight: 900, color: 'var(--neon-green)', fontFamily: 'var(--font-mono)' }}>99.98%</Typography>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Box sx={{ p: 1.5, borderRadius: 2, bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', border: '1px solid var(--border-dark)' }}>
-                      <Typography variant="caption" sx={{ color: 'var(--text-dark-secondary)', fontSize: '0.58rem', display: 'block', mb: 0.5, textTransform: 'uppercase' }}>DEPLOYMENTS</Typography>
-                      <Typography variant="body1" sx={{ fontWeight: 900, color: 'var(--neon-cyan)', fontFamily: 'var(--font-mono)' }}>{stats.todayDeployments}</Typography>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Box sx={{ p: 1.5, borderRadius: 2, bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', border: '1px solid var(--border-dark)' }}>
-                      <Typography variant="caption" sx={{ color: 'var(--text-dark-secondary)', fontSize: '0.58rem', display: 'block', mb: 0.5, textTransform: 'uppercase' }}>ACTIVE USERS</Typography>
-                      <Typography variant="body1" sx={{ fontWeight: 900, color: 'var(--neon-pink)', fontFamily: 'var(--font-mono)' }}>{stats.onlineUsers}</Typography>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Box sx={{ p: 1.5, borderRadius: 2, bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', border: '1px solid var(--border-dark)' }}>
-                      <Typography variant="caption" sx={{ color: 'var(--text-dark-secondary)', fontSize: '0.58rem', display: 'block', mb: 0.5, textTransform: 'uppercase' }}>LATENCY RATE</Typography>
-                      <Typography variant="body1" sx={{ fontWeight: 900, color: 'var(--neon-yellow)', fontFamily: 'var(--font-mono)' }}>{stats.responseTime}ms</Typography>
-                    </Box>
-                  </Grid>
-                </Grid>
-              </Box>
-
-              {/* SVG Circular Dial Meters */}
-              <Stack direction="row" spacing={2} sx={{ pt: 1, borderTop: '1px solid', borderTopColor: 'divider' }}>
-                <CircularProgressDial value={stats.cpu} label="CPU Loading" color="var(--neon-cyan)" />
-                <CircularProgressDial value={stats.memory * 2} label="Memory Load" color="var(--neon-purple)" />
-              </Stack>
-            </CyberBox>
+                <Box 
+                  ref={logContainerRef}
+                  sx={{
+                    bgcolor: mode === 'dark' ? '#04020d' : 'rgba(0, 0, 0, 0.03)',
+                    borderRadius: 2.5,
+                    p: { xs: 1.25, sm: 2 },
+                    flexGrow: 1,
+                    minHeight: { xs: 120, sm: 155 },
+                    overflowY: 'auto',
+                    border: '1px solid',
+                    borderColor: 'divider',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: { xs: '0.62rem', sm: '0.7rem' },
+                    lineHeight: 1.5,
+                    color: mode === 'dark' ? 'primary.light' : 'text.primary',
+                    scrollBehavior: 'smooth',
+                    '&::-webkit-scrollbar': { width: 3 },
+                    '&::-webkit-scrollbar-thumb': { bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)', borderRadius: 2 }
+                  }}
+                >
+                  {logs.map((log, i) => (
+                    <div key={i} style={{ marginBottom: 4, whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                      {log}
+                    </div>
+                  ))}
+                </Box>
+              </CyberBox>
+            </Grid>
           </Grid>
-
-          {/* Compiler Terminal (Right) */}
-          <Grid item xs={12} md={6}>
-            <CyberBox sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
-              <Typography variant="subtitle2" sx={{ fontWeight: 800, color: 'text.primary', mb: 2, fontFamily: 'var(--font-heading)', display: 'flex', alignItems: 'center', gap: 1, letterSpacing: '0.05em' }}>
-                <Speed sx={{ color: 'var(--neon-purple)', fontSize: 18 }} /> DIAGNOSTIC FEEDSTREAM
-              </Typography>
-              
-              <Box 
-                ref={logContainerRef}
-                sx={{
-                  bgcolor: mode === 'dark' ? '#04020d' : 'rgba(0, 0, 0, 0.03)',
-                  borderRadius: 2.5,
-                  p: 2,
-                  flexGrow: 1,
-                  minHeight: 155,
-                  overflowY: 'auto',
-                  border: '1px solid',
-                  borderColor: 'divider',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.7rem',
-                  lineHeight: 1.5,
-                  color: mode === 'dark' ? 'primary.light' : 'text.primary',
-                  scrollBehavior: 'smooth',
-                  '&::-webkit-scrollbar': { width: 3 },
-                  '&::-webkit-scrollbar-thumb': { bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)', borderRadius: 2 }
-                }}
-              >
-                {logs.map((log, i) => (
-                  <div key={i} style={{ marginBottom: 4, whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                    {log}
-                  </div>
-                ))}
-              </Box>
-            </CyberBox>
-          </Grid>
-        </Grid>
+        </Box>
       </Stack>
     </Box>
   );

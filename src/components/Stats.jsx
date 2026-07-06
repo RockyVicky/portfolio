@@ -47,21 +47,22 @@ const Counter = ({ value, suffix, duration = 2000 }) => {
 
 const Stats = () => {
   return (
-    <Box sx={{ py: 10, position: 'relative', overflow: 'hidden', zIndex: 1 }}>
+    <Box sx={{ py: { xs: 6, md: 10 }, position: 'relative', overflow: 'hidden', zIndex: 1 }}>
       <Container maxWidth="lg">
-        <Grid container spacing={4} justifyContent="center">
+        <Grid container spacing={{ xs: 2, md: 4 }} justifyContent="center">
           {statsData.map((stat, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid item xs={6} sm={6} md={3} key={index}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
+                style={{ height: '100%' }}
               >
                 <Box
                   className="glass-card"
                   sx={{
-                    p: 4,
+                    p: { xs: 2.5, sm: 3, md: 4 },
                     textAlign: 'center',
                     borderRadius: 4,
                     height: '100%',
@@ -83,7 +84,7 @@ const Stats = () => {
                     variant="h2"
                     sx={{
                       fontWeight: 900,
-                      fontSize: { xs: '3rem', md: '4rem' },
+                      fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
                       mb: 1,
                       fontFamily: 'var(--font-heading)',
                       background: index % 2 === 0 
@@ -103,7 +104,7 @@ const Stats = () => {
                       mb: 1,
                       textTransform: 'uppercase',
                       letterSpacing: '0.05em',
-                      fontSize: '1rem'
+                      fontSize: { xs: '0.8rem', sm: '0.9rem', md: '1rem' }
                     }}
                   >
                     {stat.label}
@@ -112,7 +113,8 @@ const Stats = () => {
                     variant="body2"
                     sx={{
                       color: 'var(--text-dark-secondary)',
-                      lineHeight: 1.5
+                      lineHeight: 1.5,
+                      fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.875rem' }
                     }}
                   >
                     {stat.description}

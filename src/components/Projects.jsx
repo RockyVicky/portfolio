@@ -191,6 +191,9 @@ const Projects = () => {
               onChange={(e, val) => setFilter(val)} 
               textColor="primary" 
               indicatorColor="primary"
+              variant="scrollable"
+              scrollButtons="auto"
+              allowScrollButtonsMobile
               sx={{
                 bgcolor: 'background.paper',
                 borderRadius: 3,
@@ -207,7 +210,7 @@ const Projects = () => {
                 '& .MuiTab-root': {
                   fontWeight: 700,
                   borderRadius: 2.5,
-                  px: { xs: 1.5, sm: 3 },
+                  px: { xs: 2, sm: 3 },
                   zIndex: 1,
                   textTransform: 'none',
                   fontSize: { xs: '0.85rem', sm: '0.95rem' }
@@ -222,7 +225,7 @@ const Projects = () => {
           </Box>
         </Box>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={{ xs: 3, md: 4 }}>
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => (
               <Grid item xs={12} md={6} key={project.id} component={motion.div} layout
@@ -242,7 +245,7 @@ const Projects = () => {
                     border: '1px solid var(--border-dark)',
                     position: 'relative',
                     overflow: 'hidden',
-                    p: { xs: 3, sm: 5 },
+                    p: { xs: 2.5, sm: 4 },
                     // Robot scanning laser bar sweep effect on hover
                     '&::after': {
                       content: '""',
@@ -303,12 +306,12 @@ const Projects = () => {
                     </Box>
 
                     {/* Headline */}
-                    <Typography variant="h3" sx={{ fontWeight: 800, mb: 2, color: 'var(--text-dark-primary)', fontSize: '1.75rem' }}>
+                    <Typography variant="h3" sx={{ fontWeight: 800, mb: 2, color: 'var(--text-dark-primary)', fontSize: { xs: '1.35rem', sm: '1.75rem' } }}>
                       {project.title}
                     </Typography>
 
                     {/* Paragraph */}
-                    <Typography variant="body1" sx={{ color: 'var(--text-dark-secondary)', mb: 4, lineHeight: 1.6, fontSize: '0.95rem', flexGrow: 1 }}>
+                    <Typography variant="body1" sx={{ color: 'var(--text-dark-secondary)', mb: 4, lineHeight: 1.6, fontSize: { xs: '0.88rem', sm: '0.95rem' }, flexGrow: 1 }}>
                       {project.description}
                     </Typography>
 
@@ -390,11 +393,11 @@ const Projects = () => {
             sx: {
               bgcolor: (theme) => theme.palette.mode === 'dark' ? '#0a071a' : '#ffffff',
               backgroundImage: 'none',
-              borderRadius: 5,
+              borderRadius: { xs: 4, sm: 5 },
               border: '1px solid',
               borderColor: 'divider',
               boxShadow: (theme) => theme.palette.mode === 'dark' ? '0 25px 80px rgba(0,0,0,0.9)' : '0 20px 60px rgba(0,0,0,0.1)',
-              p: { xs: 2, sm: 4 }
+              p: { xs: 1.5, sm: 4 }
             }
           }}
         >
@@ -403,7 +406,7 @@ const Projects = () => {
               {/* Header */}
               <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 3, pb: 1 }}>
                 <Box>
-                  <Typography variant="h3" sx={{ fontWeight: 900, fontFamily: 'var(--font-heading)', color: 'text.primary', mb: 0.5, fontSize: { xs: '1.8rem', sm: '2.4rem' } }}>
+                  <Typography variant="h3" sx={{ fontWeight: 900, fontFamily: 'var(--font-heading)', color: 'text.primary', mb: 0.5, fontSize: { xs: '1.4rem', sm: '2.2rem' } }}>
                     {selectedProject.title}
                   </Typography>
                   <Chip 
@@ -423,12 +426,12 @@ const Projects = () => {
               </DialogTitle>
 
               {/* Body Content */}
-              <DialogContent sx={{ p: 3, mt: 2 }}>
+              <DialogContent sx={{ p: { xs: 1.5, sm: 3 }, mt: { xs: 1, sm: 2 } }}>
                 <Stack spacing={4}>
                   {/* Problem & Solution Grid */}
-                  <Grid container spacing={3}>
+                  <Grid container spacing={{ xs: 2, sm: 3 }}>
                     <Grid item xs={12} sm={6}>
-                      <Box sx={{ p: 3, borderRadius: 3, bgcolor: 'rgba(255, 0, 112, 0.03)', border: '1px solid rgba(255, 0, 112, 0.1)' }}>
+                      <Box sx={{ p: { xs: 2, sm: 3 }, borderRadius: 3, bgcolor: 'rgba(255, 0, 112, 0.03)', border: '1px solid rgba(255, 0, 112, 0.1)' }}>
                         <Typography variant="h6" sx={{ fontWeight: 800, color: '#ff0070', mb: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
                           <StarBorder sx={{ fontSize: 20 }} /> The Problem
                         </Typography>
@@ -438,7 +441,7 @@ const Projects = () => {
                       </Box>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Box sx={{ p: 3, borderRadius: 3, bgcolor: 'rgba(0, 255, 102, 0.03)', border: '1px solid rgba(0, 255, 102, 0.1)' }}>
+                      <Box sx={{ p: { xs: 2, sm: 3 }, borderRadius: 3, bgcolor: 'rgba(0, 255, 102, 0.03)', border: '1px solid rgba(0, 255, 102, 0.1)' }}>
                         <Typography variant="h6" sx={{ fontWeight: 800, color: '#00ff66', mb: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
                           <AssignmentTurnedIn sx={{ fontSize: 20 }} /> The Solution
                         </Typography>
@@ -455,12 +458,12 @@ const Projects = () => {
                       <Layers sx={{ fontSize: 20 }} /> Architecture Schema
                     </Typography>
                     <Box sx={{ 
-                      p: 2.5, 
+                      p: { xs: 1.8, sm: 2.5 }, 
                       borderRadius: 3, 
                       bgcolor: (theme) => theme.palette.mode === 'dark' ? '#04020d' : 'rgba(0, 0, 0, 0.03)', 
                       border: '1px solid var(--border-dark)',
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '0.85rem',
+                      fontSize: { xs: '0.75rem', sm: '0.85rem' },
                       color: (theme) => theme.palette.mode === 'dark' ? '#00f0ff' : 'primary.dark',
                       overflowX: 'auto',
                       whiteSpace: 'nowrap'

@@ -42,6 +42,7 @@ const Hero = ({ activeSection = 'home', mode = 'dark' }) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
+            style={{ width: '100%', minWidth: 0, overflow: 'hidden' }}
           >
             {/* Pulsating heart indicator of active factory */}
             <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 3 }}>
@@ -61,7 +62,7 @@ const Hero = ({ activeSection = 'home', mode = 'dark' }) => {
             <Typography 
               variant="h1" 
               sx={{ 
-                fontSize: { xs: '2.5rem', sm: '3.6rem', md: '4.2rem' }, 
+                fontSize: { xs: '2.15rem', sm: '3.2rem', md: '4.2rem' }, 
                 lineHeight: 1.15, 
                 fontWeight: 900,
                 fontFamily: 'var(--font-heading)',
@@ -77,7 +78,7 @@ const Hero = ({ activeSection = 'home', mode = 'dark' }) => {
               variant="body1" 
               sx={{ 
                 color: 'var(--text-dark-secondary)', 
-                fontSize: { xs: '1rem', md: '1.15rem' },
+                fontSize: { xs: '0.95rem', md: '1.15rem' },
                 lineHeight: 1.7,
                 maxWidth: '560px',
                 mb: 5
@@ -87,7 +88,7 @@ const Hero = ({ activeSection = 'home', mode = 'dark' }) => {
             </Typography>
 
             {/* CTA Actions */}
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2.5} sx={{ mb: 5 }}>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 5, width: '100%' }}>
               <Button 
                 variant="contained" 
                 size="large" 
@@ -100,6 +101,7 @@ const Hero = ({ activeSection = 'home', mode = 'dark' }) => {
                   borderRadius: 3,
                   fontWeight: 700,
                   textTransform: 'none',
+                  width: { xs: '100%', sm: 'auto' },
                   background: 'linear-gradient(135deg, #00f0ff 0%, #7000ff 100%)',
                   boxShadow: '0 4px 20px rgba(112, 0, 255, 0.4)',
                   '&:hover': {
@@ -121,6 +123,7 @@ const Hero = ({ activeSection = 'home', mode = 'dark' }) => {
                   borderRadius: 3,
                   fontWeight: 700,
                   textTransform: 'none',
+                  width: { xs: '100%', sm: 'auto' },
                   borderColor: 'divider',
                   color: 'text.primary',
                   background: 'transparent',
@@ -137,7 +140,7 @@ const Hero = ({ activeSection = 'home', mode = 'dark' }) => {
             </Stack>
 
             {/* Footer socials */}
-            <Stack direction="row" spacing={1.5} alignItems="center">
+            <Stack direction="row" spacing={1.5} alignItems="center" flexWrap="wrap" useFlexGap>
               <IconButton 
                 component="a" 
                 href="https://www.linkedin.com/in/raakesh-ramakrishnan-349280268" 
@@ -147,6 +150,8 @@ const Hero = ({ activeSection = 'home', mode = 'dark' }) => {
                   color: 'var(--text-dark-secondary)', 
                   border: '1px solid var(--border-dark)',
                   background: mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)',
+                  width: 44,
+                  height: 44,
                   '&:hover': { color: 'primary.main', borderColor: 'primary.main', background: mode === 'dark' ? 'rgba(0, 240, 255, 0.05)' : 'rgba(0, 122, 135, 0.06)' }
                 }}
               >
@@ -161,6 +166,8 @@ const Hero = ({ activeSection = 'home', mode = 'dark' }) => {
                   color: 'var(--text-dark-secondary)', 
                   border: '1px solid var(--border-dark)',
                   background: mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)',
+                  width: 44,
+                  height: 44,
                   '&:hover': { color: 'secondary.main', borderColor: 'secondary.main', background: mode === 'dark' ? 'rgba(112, 0, 255, 0.05)' : 'rgba(82, 0, 204, 0.06)' }
                 }}
               >
@@ -173,18 +180,24 @@ const Hero = ({ activeSection = 'home', mode = 'dark' }) => {
                   color: 'var(--text-dark-secondary)', 
                   border: '1px solid var(--border-dark)',
                   background: mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)',
+                  width: 44,
+                  height: 44,
                   '&:hover': { color: '#ff0070', borderColor: '#ff0070', background: mode === 'dark' ? 'rgba(255, 0, 112, 0.05)' : 'rgba(204, 0, 89, 0.06)' }
                 }}
               >
                 <Email />
               </IconButton>
-              <Box sx={{ width: '1px', height: '24px', bgcolor: 'var(--border-dark)', mx: 1 }} />
+              <Box sx={{ width: '1px', height: '24px', bgcolor: 'var(--border-dark)', mx: 1, display: { xs: 'none', sm: 'block' } }} />
               <Button 
                 variant="text" 
                 color="secondary" 
                 sx={{ 
                   fontWeight: 700, 
                   color: 'var(--text-dark-secondary)',
+                  px: 2.5,
+                  py: 1.25,
+                  borderRadius: 2.5,
+                  minHeight: 44,
                   '&:hover': { color: 'text.primary' }
                 }}
               >
@@ -198,6 +211,7 @@ const Hero = ({ activeSection = 'home', mode = 'dark' }) => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            style={{ width: '100%', minWidth: 0, overflow: 'hidden' }}
           >
             <SoftwareFactory activeSection={activeSection} mode={mode} />
           </motion.div>
@@ -211,8 +225,8 @@ const Hero = ({ activeSection = 'home', mode = 'dark' }) => {
 const GridHeroContainer = ({ children }) => (
   <Box sx={{
     display: 'grid',
-    gridTemplateColumns: { xs: '1fr', lg: '1fr 1.2fr' },
-    gap: { xs: 8, lg: 4 },
+    gridTemplateColumns: { xs: '1fr', md: '1fr 1.2fr' },
+    gap: { xs: 8, md: 4 },
     alignItems: 'center'
   }}>
     {children}

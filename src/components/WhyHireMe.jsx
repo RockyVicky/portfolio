@@ -107,7 +107,7 @@ const WhyHireMe = () => {
 
         <Grid 
           container 
-          spacing={3} 
+          spacing={{ xs: 2.5, md: 3 }} 
           component={motion.div} 
           variants={containerVariants} 
           initial="hidden" 
@@ -120,7 +120,7 @@ const WhyHireMe = () => {
                 <Box
                     className="glass-card"
                     sx={{
-                      p: 4,
+                      p: { xs: 2.5, md: 4 },
                       height: '100%',
                       display: 'flex',
                       flexDirection: 'column',
@@ -138,7 +138,7 @@ const WhyHireMe = () => {
                     sx={{ 
                       fontWeight: 700, 
                       mb: 1.5, 
-                      fontSize: '1.25rem',
+                      fontSize: { xs: '1.15rem', md: '1.25rem' },
                       color: 'var(--text-dark-primary)' 
                     }}
                   >
@@ -149,7 +149,7 @@ const WhyHireMe = () => {
                     sx={{ 
                       color: 'var(--text-dark-secondary)', 
                       lineHeight: 1.6,
-                      fontSize: '0.9rem' 
+                      fontSize: { xs: '0.85rem', md: '0.9rem' } 
                     }}
                   >
                     {item.desc}

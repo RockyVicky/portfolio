@@ -39,7 +39,7 @@ const Contact = () => {
           </Typography>
         </Box>
 
-        <Grid container spacing={8} sx={{ justifyContent: 'center' }}>
+        <Grid container spacing={{ xs: 4, md: 8 }} sx={{ justifyContent: 'center' }}>
           {/* Left Details Column */}
           <Grid item xs={12} md={5}>
             <motion.div 
@@ -48,7 +48,7 @@ const Contact = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <Typography variant="h3" sx={{ mb: 3, fontWeight: 800, color: 'text.primary', fontSize: '1.8rem' }}>
+              <Typography variant="h3" sx={{ mb: 3, fontWeight: 800, color: 'text.primary', fontSize: { xs: '1.35rem', sm: '1.8rem' } }}>
                 Global Distribution Node
               </Typography>
               <Typography variant="body1" sx={{ color: 'var(--text-dark-secondary)', mb: 5, fontSize: '1rem', lineHeight: 1.7 }}>
@@ -101,7 +101,7 @@ const Contact = () => {
 
               <Box sx={{ mt: 5, pt: 4, borderTop: '1px solid', borderTopColor: 'divider' }}>
                 <Typography variant="body2" color="var(--text-dark-secondary)" sx={{ mb: 2, textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.75rem' }}>Direct Links</Typography>
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={{ xs: 1.5, sm: 2 }} flexWrap="wrap" useFlexGap>
                   <Button component="a" href="mailto:raakeshofficial777@gmail.com" startIcon={<Email />} sx={{ color: 'var(--text-dark-secondary)', textTransform: 'none', fontWeight: 600, '&:hover': { color: 'text.primary' } }}>
                     Email
                   </Button>
@@ -127,12 +127,12 @@ const Contact = () => {
               <Box
                 className="glass-card"
                 sx={{
-                  p: { xs: 4, sm: 6 },
+                  p: { xs: 2.5, sm: 5 },
                   borderRadius: 4.5
                 }}
               >
                 <form onSubmit={handleSubmit} noValidate>
-                  <Grid container spacing={3}>
+                  <Grid container spacing={{ xs: 2, md: 3 }}>
                     <Grid item xs={12}>
                       <TextField 
                         fullWidth 

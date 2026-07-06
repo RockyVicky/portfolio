@@ -70,7 +70,7 @@ const Navbar = ({ mode, toggleTheme }) => {
                   fontWeight: 900, 
                   letterSpacing: '0.05em', 
                   fontFamily: 'var(--font-heading)',
-                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                  fontSize: { xs: '1.15rem', sm: '1.25rem', md: '1.5rem' },
                   color: 'var(--text-dark-primary)'
                 }}
               >
@@ -119,26 +119,30 @@ const Navbar = ({ mode, toggleTheme }) => {
             </Box>
             
             {/* Mobile Actions */}
-            <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', gap: 1 }}>
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', gap: 1.5 }}>
               <IconButton 
                 onClick={toggleTheme} 
                 sx={{ 
                   color: 'var(--text-dark-primary)', 
                   bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)',
-                  border: '1px solid var(--border-dark)'
+                  border: '1px solid var(--border-dark)',
+                  width: 44,
+                  height: 44
                 }}
               >
-                {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+                {mode === 'dark' ? <Brightness7 sx={{ fontSize: 20 }} /> : <Brightness4 sx={{ fontSize: 20 }} />}
               </IconButton>
               <IconButton 
                 onClick={handleDrawerToggle} 
                 sx={{ 
                   color: 'var(--text-dark-primary)',
                   bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)',
-                  border: '1px solid var(--border-dark)'
+                  border: '1px solid var(--border-dark)',
+                  width: 44,
+                  height: 44
                 }}
               >
-                <MenuIcon />
+                <MenuIcon sx={{ fontSize: 22 }} />
               </IconButton>
             </Box>
           </Toolbar>
@@ -156,31 +160,50 @@ const Navbar = ({ mode, toggleTheme }) => {
           '& .MuiDrawer-paper': { 
             boxSizing: 'border-box', 
             width: 280, 
-            background: mode === 'dark' ? '#0a071a' : '#ffffff',
+            background: mode === 'dark' ? 'rgba(10, 7, 26, 0.96)' : 'rgba(255, 255, 255, 0.98)',
+            backdropFilter: 'blur(20px)',
             borderLeft: '1px solid var(--border-dark)',
-            p: 3
+            borderTopLeftRadius: 24,
+            borderBottomLeftRadius: 24,
+            p: 3,
+            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.3)'
           },
         }}
       >
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-          <Typography variant="h5" sx={{ fontWeight: 800, fontFamily: 'var(--font-heading)', color: 'var(--text-dark-primary)' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+          <Typography variant="h5" sx={{ fontWeight: 800, fontFamily: 'var(--font-heading)', color: 'var(--text-dark-primary)', fontSize: '1.25rem' }}>
             Menu
           </Typography>
-          <IconButton onClick={handleDrawerToggle} sx={{ color: 'var(--text-dark-primary)' }}>
-            <CloseIcon />
+          <IconButton 
+            onClick={handleDrawerToggle} 
+            sx={{ 
+              color: 'var(--text-dark-primary)', 
+              width: 40, 
+              height: 40,
+              bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)',
+              border: '1px solid var(--border-dark)'
+            }}
+          >
+            <CloseIcon sx={{ fontSize: 20 }} />
           </IconButton>
         </Box>
         <Divider sx={{ borderColor: 'var(--border-dark)', mb: 3 }} />
         <List>
           {menuItems.map((item) => (
-            <ListItem key={item} disablePadding sx={{ mb: 1 }}>
+            <ListItem key={item} disablePadding sx={{ mb: 1.5 }}>
               <ListItemButton 
                 onClick={() => { handleDrawerToggle(); scrollToSection(item.toLowerCase()); }} 
                 sx={{ 
                   textAlign: 'left', 
-                  py: 1.5,
-                  borderRadius: 2,
-                  '&:hover': { bgcolor: mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)' }
+                  py: 1.8,
+                  px: 2.5,
+                  borderRadius: 3,
+                  border: '1px solid transparent',
+                  transition: 'all 0.25s',
+                  '&:hover': { 
+                    bgcolor: mode === 'dark' ? 'rgba(0, 240, 255, 0.04)' : 'rgba(112, 0, 255, 0.04)',
+                    borderColor: 'primary.main'
+                  }
                 }} 
               >
                 <ListItemText 
@@ -188,7 +211,8 @@ const Navbar = ({ mode, toggleTheme }) => {
                   primaryTypographyProps={{ 
                     fontWeight: 700,
                     color: 'var(--text-dark-primary)',
-                    fontSize: '1.1rem'
+                    fontSize: '1.05rem',
+                    letterSpacing: '0.02em'
                   }} 
                 />
               </ListItemButton>

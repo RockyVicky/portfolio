@@ -45,7 +45,7 @@ const Testimonials = () => {
           </Typography>
         </Box>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={{ xs: 3, md: 4 }}>
           {testimonials.map((item, index) => (
             <Grid item xs={12} md={4} key={index}>
               <motion.div
@@ -58,7 +58,7 @@ const Testimonials = () => {
                 <Box
                   className="glass-card"
                   sx={{
-                    p: 4,
+                    p: { xs: 3, md: 4 },
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
@@ -66,7 +66,7 @@ const Testimonials = () => {
                     position: 'relative'
                   }}
                 >
-                  <FormatQuote sx={{ fontSize: 48, color: 'rgba(112, 0, 255, 0.2)', position: 'absolute', top: 16, right: 16 }} />
+                  <FormatQuote sx={{ fontSize: { xs: 36, md: 48 }, color: 'rgba(112, 0, 255, 0.2)', position: 'absolute', top: 16, right: 16 }} />
 
                   <Typography 
                     variant="body1" 
@@ -75,7 +75,7 @@ const Testimonials = () => {
                       mb: 4, 
                       lineHeight: 1.7, 
                       fontStyle: 'italic',
-                      fontSize: '0.95rem',
+                      fontSize: { xs: '0.88rem', md: '0.95rem' },
                       flexGrow: 1 
                     }}
                   >

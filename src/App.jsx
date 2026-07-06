@@ -4,6 +4,7 @@ import { CssBaseline, Box, CircularProgress } from '@mui/material';
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import BackgroundRobots from './components/BackgroundRobots';
 
 // Lazy load secondary sections for optimal bundle size and Lighthouse scores
 const Stats = lazy(() => import('./components/Stats'));
@@ -122,6 +123,7 @@ function App() {
   return (
     <ThemeProvider theme={finalTheme}>
       <CssBaseline />
+      <BackgroundRobots mode={mode} />
       <Navbar mode={mode} toggleTheme={toggleTheme} />
       <Hero activeSection={activeSection} mode={mode} />
       <Suspense fallback={<LoadingFallback />}>

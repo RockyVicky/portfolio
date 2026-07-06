@@ -35,7 +35,7 @@ const About = () => {
       }} />
 
       <Container maxWidth="lg">
-        <Grid container spacing={6} alignItems="center">
+        <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
           {/* Left Column: Factory Overview Specs */}
           <Grid item xs={12} md={7}>
             <motion.div
@@ -100,7 +100,7 @@ const About = () => {
             </motion.div>
 
             {/* highlights list */}
-            <Grid container spacing={3}>
+            <Grid container spacing={{ xs: 2.5, sm: 3 }}>
               {highlights.map((item, index) => (
                 <Grid item xs={12} sm={6} key={index}>
                   <motion.div
@@ -143,7 +143,7 @@ const About = () => {
               <Paper 
                 className="glass-card"
                 sx={{
-                  p: 4,
+                  p: { xs: 2.5, md: 4 },
                   borderRadius: 4.5,
                   position: 'relative',
                   width: { xs: '100%', sm: 360 },
@@ -205,8 +205,8 @@ const About = () => {
                   </Typography>
                 </Box>
 
-                <Stack spacing={1.5} sx={{ 
-                  p: 2, 
+                <Stack spacing={1.2} sx={{ 
+                  p: { xs: 1.5, sm: 2 }, 
                   borderRadius: 2.5, 
                   bgcolor: (theme) => theme.palette.mode === 'dark' ? '#04020d' : 'rgba(0, 0, 0, 0.02)', 
                   border: '1px solid',
